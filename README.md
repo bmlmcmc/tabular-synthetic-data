@@ -4,10 +4,12 @@
  1. Training function: function which used to train the model
  2. Example architecture for the COVID-19 data case
  3. Example of usage
- 
+
  There are several scripts needed to notice:
  1. data_prep: to call the data
  2. calculate: contains the calculation functions (e.g. KL Divergence using various distributions)
+
+Special thanks to: Irfan Dwiki Bhaswara (https://github.com/bhaswara) who helped in construction of the scripts
 
 ## References
     VAE: D.P. Kingma, M. Welling, Auto-Encoding Variational Bayes, 2nd Int. Conf. Learn. Represent. ICLR 2014 - Conf. Track Proc. (2013). https://arxiv.org/abs/1312.6114v10.
