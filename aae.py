@@ -101,55 +101,52 @@ def train_aae(data,nocols,enc,dec,dis,latent_length=2,epochs=50,loss_ae=nn.BCELo
 ############# EXAMPLE ############
 ######### COVID-19 DATA ##########
 
-class Encoder(nn.Module):
-    def __init__(self, latent_length):
-        super().__init__()
-        self.encoder = nn.Sequential(
-            nn.Linear(33, 8),
-            #nn.Dropout(),
-            nn.Linear(8,latent_length)
-        )
-        
-    def forward(self, x):
-        return self.encoder(x)
-    
-class Decoder(nn.Module):
-    def __init__(self, latent_length, indexes, each_cat):
-        super().__init__()
-        self.decoder = nn.Sequential(
-            nn.Linear(latent_length, 8),
-            nn.Linear(8, 33)
-        )
-        
-        self.indexes = indexes
-        self.each_cat = each_cat
-        
-    def forward(self, x):
-        decoded = self.decoder(x)
-        if self.each_cat:
-            for i in range(len(self.indexes)-1):
-                s = nn.Softmax(dim=1)
-                decoded[:,self.indexes[i]:self.indexes[i+1]] = s(decoded[:,self.indexes[i]:self.indexes[i+1]].clone())
-            return decoded
-        else:
-            return nn.Sigmoid()(decoded)
+## building the generator and discriminator
+class Generator(nn.Module):
+  def __init__(self,latent_length:int,indexes:list,each_cat:int):
+    super(Generator,self).__init__()
+    self.encoder = nn.Sequential(
+        nn.Linear(33,8),
+        # nn.Dropout(),
+        nn.Linear(8,latent_length)
+    )
 
-        
+    self.decoder = nn.Sequential(
+        # nn.ReLU(),
+        nn.Linear(latent_length,8),
+        # nn.Dropout(),
+        nn.Linear(8,33),
+        # nn.Sigmoid()
+    )
+    self.indexes = indexes
+    self.each_cat = each_cat
+
+  def forward(self,x):
+    encoded = self.encoder(x)
+    decoded = self.decoder(encoded)
+    if self.each_cat:
+      for i in range(len(self.indexes)-1):
+        s = nn.Softmax(dim=1)
+        decoded[:,self.indexes[i]:self.indexes[i+1]] = s(decoded[:,self.indexes[i]:self.indexes[i+1]].clone())
+      return encoded,decoded
+    else:
+      return encoded,nn.Sigmoid()(decoded)
+    
 class Discriminator(nn.Module):
-    def __init__(self,latent_length,gantype):
-        super().__init__()
-        if gantype == 'vanilla':
-            self.dis = nn.Sequential(
-                  nn.Linear(latent_length,1),
-                  nn.Sigmoid()
-            )
-        elif gantype=='wasserstein':
-            self.dis = nn.Sequential(
-                nn.Linear(latent_length, 1)
-            )
-            
-    def forward(self,x):
-        return self.dis(x)
+  def __init__(self,latent_length:int,gantype:str):
+    super(Discriminator,self).__init__()
+    if gantype=='vanilla':
+      self.dis = nn.Sequential(
+          nn.Linear(latent_length,1),
+          nn.Sigmoid()
+      )
+    elif gantype=='wasserstein':
+      self.dis = nn.Sequential(
+          nn.Linear(latent_length,1)
+      )
+
+  def forward(self,x):
+    return self.dis(x)
 
 data_covid1, col_index = data_covid(35)
 

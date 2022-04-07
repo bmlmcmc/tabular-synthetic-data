@@ -62,7 +62,8 @@ def data_iris(batch_size,combine=TrivialAugmentWide):
   return DataLoader(iris_batched, batch_size=batch_size, shuffle=True)
 
 ## prepare the data
-def data_covid(batch_size):
+def data_covid(batch_size,seed=0):
+  torch.manual_seed(seed)
   data = pd.read_csv('data_covid_synthetic.csv')
   data['kelumur'] = np.where((data['kelUsia_2.Produktif']==0) & (data['kelUsia_3.Lansia']==0),0,
                             np.where((data['kelUsia_2.Produktif']==1) & (data['kelUsia_3.Lansia']==0),1,2))

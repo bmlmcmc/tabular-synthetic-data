@@ -20,7 +20,7 @@ def train_avb(data,nocols,enc,dec,dis,latent_length=2,eps_length=3,epochs=50,los
     
     encoder_opt = torch.optim.Adam(encoder.parameters(), lr=3e-04)
     decoder_opt = torch.optim.Adam(decoder.parameters(),lr=3e-04)
-    discriminator_opt = torch.optim.Adam(discriminator.parameters(),lr=0.001)
+    discriminator_opt = torch.optim.Adam(discriminator.parameters(),lr=1e-3)
 
     start1 = time.time()
     real_data = []
@@ -74,20 +74,6 @@ def train_avb(data,nocols,enc,dec,dis,latent_length=2,eps_length=3,epochs=50,los
             decoder.zero_grad()
             discriminator.zero_grad()
             
-            z_sample = encoder(torch.cat([x, eps], 1))
-            D_fake = discriminator(torch.cat([x, z_sample], 1))
-            
-            if gantype == 'vanilla':
-                G_loss = -torch.mean(torch.log(D_fake))
-            elif gantype == 'wasserstein':
-                G_loss = -torch.mean(D_fake)
-                
-            G_loss.backward()
-            encoder_opt.step()
-            encoder.zero_grad()
-            decoder.zero_grad()
-            discriminator.zero_grad()
-            
             if epoch+1==epochs:
                 real_data.append(x)
                 gen_data.append(X_sample)
@@ -108,7 +94,7 @@ class Encoder(nn.Module):
         super().__init__()
         self.encoder = nn.Sequential(
             nn.Linear(33+eps_length,8),
-            #nn.Dropout(),
+            nn.Dropout(),
             nn.Linear(8,latent_length)
         )
         
@@ -120,6 +106,7 @@ class Decoder(nn.Module):
         super().__init__()
         self.decoder = nn.Sequential(
             nn.Linear(latent_length, 8),
+            nn.Dropout(),
             nn.Linear(8, 33)
         )
         
@@ -143,14 +130,14 @@ class Discriminator(nn.Module):
         if gantype == 'vanilla':
             self.dis = nn.Sequential(
                   nn.Linear(33+latent_length,10),
-                  #nn.Dropout(),
+                  nn.Dropout(),
                   nn.Linear(10,1),
                   nn.Sigmoid()
             )
         elif gantype=='wasserstein':
             self.dis = nn.Sequential(
                 nn.Linear(33+latent_length,10),
-                #nn.Dropout(),
+                nn.Dropout(),
                 nn.Linear(10,1),
             )
             
