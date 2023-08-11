@@ -11,7 +11,7 @@
 
 This code was used to create the paper titled [Data Analysis and Synthesis of COVID-19 Patients using Deep Generative Models: A Case Study of Jakarta, Indonesia](https://ieeexplore.ieee.org/document/9921948/). If you use this code, please cite our paper as well here:
 ```
-<h1>B. I. Nasution, I. D. Bhaswara, Y. Nugraha and J. I. Kanggrawan, "Data Analysis and Synthesis of COVID-19 Patients using Deep Generative Models: A Case Study of Jakarta, Indonesia," 2022 IEEE International Smart Cities Conference (ISC2), Pafos, Cyprus, 2022, pp. 1-7, doi: 10.1109/ISC255366.2022.9921948.</h1>
+B. I. Nasution, I. D. Bhaswara, Y. Nugraha and J. I. Kanggrawan, "Data Analysis and Synthesis of COVID-19 Patients using Deep Generative Models: A Case Study of Jakarta, Indonesia," 2022 IEEE International Smart Cities Conference (ISC2), Pafos, Cyprus, 2022, pp. 1-7, doi: 10.1109/ISC255366.2022.9921948.
 ```
 Or using the bibtex:
 ```
