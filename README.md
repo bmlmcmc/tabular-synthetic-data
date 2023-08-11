@@ -26,7 +26,7 @@ Or using the bibtex:
   doi={10.1109/ISC255366.2022.9921948}}
 ```
 
-Special thanks to: Irfan Dwiki Bhaswara (https://github.com/bhaswara) who helped in construction of the scripts
+Special thanks to: [Irfan Dwiki Bhaswara](https://github.com/bhaswara) who helped in construction of the scripts
 
 ## References
     VAE: D.P. Kingma, M. Welling, Auto-Encoding Variational Bayes, 2nd Int. Conf. Learn. Represent. ICLR 2014 - Conf. Track Proc. (2013). https://arxiv.org/abs/1312.6114v10.
@@ -35,5 +35,5 @@ Special thanks to: Irfan Dwiki Bhaswara (https://github.com/bhaswara) who helped
     AVB: L. Mescheder, S. Nowozin and A. Geiger, "Adversarial variational bayes: Unifying variational autoencoders and generative adversarial networks", Proceedings of the 34th International Conference on Machine Learning - Volume 70 ser. ICML'17, pp. 2391-2400, (2017). https://arxiv.org/abs/1701.04722.
     Wasserstein distance: M. Arjovsky, S. Chintala and L. Bottou, "Wasserstein Generative Adversarial Networks" in Proceedings of the 34th International Conference on Machine Learning ser. Proceedings of Machine Learning Research, vol. 70, pp. 214-223, (2017). https://proceedings.mlr.press/v70/arjovsky17a.html
 
-    AAE and AVB implementation adaptation : https://github.com/wiseodd/generative-models
-    Wasserstein addition: https://agustinus.kristia.de/techblog/2017/02/04/wasserstein-gan/
+    [AAE and AVB implementation adaptation](https://github.com/wiseodd/generative-models)
+    [Wasserstein addition](https://agustinus.kristia.de/techblog/2017/02/04/wasserstein-gan/)
