@@ -7,7 +7,7 @@
 
  There are several scripts needed to notice:
  1. data_prep: to call the data
- 2. calculate: contains the calculation functions (e.g. KL Divergence using various distributions)
+ 2. calculations: contains the calculation functions (e.g. KL Divergence using various distributions)
 
 This code was used to create the paper titled [Data Analysis and Synthesis of COVID-19 Patients using Deep Generative Models: A Case Study of Jakarta, Indonesia](https://ieeexplore.ieee.org/document/9921948/). If you use this code, please cite our paper as well here:
 ```
